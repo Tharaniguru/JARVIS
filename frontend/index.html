@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JARVIS - Face Recognition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    input, button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>JARVIS - Face Recognition</h1>
+
+  <div>
+    <button id="recognizeBtn">Start Recognition</button>
+    <button id="stopBtn">Stop Recognition</button>
+  </div>
+
+  <div>
+    <input type="text" id="nameInput" placeholder="Enter Name">
+    <button id="collectBtn">Collect Face</button>
+  </div>
+
+  <script>
+    document.getElementById('recognizeBtn').addEventListener('click', () => {
+      window.api.startRecognition();
+    });
+
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      window.api.stopRecognition();
+    });
+
+    document.getElementById('collectBtn').addEventListener('click', () => {
+      const name = document.getElementById('nameInput').value.trim();
+      if (name) {
+        window.api.startCollection(name);
+      } else {
+        alert("Please enter a name before collecting face data.");
+      }
+    });
+  </script>
+</body>
+</html>
