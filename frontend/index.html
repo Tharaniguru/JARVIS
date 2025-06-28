@@ -1,51 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>JARVIS - Face Recognition</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 30px;
-    }
-    input, button {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>JARVIS - AI Assistant</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>JARVIS - Face Recognition</h1>
+  <div class="center-container">
+    <div class="pulse"></div>
+    <div class="jarvis-core" onclick="toggleButtons()"></div>
 
-  <div>
-    <button id="recognizeBtn">Start Recognition</button>
-    <button id="stopBtn">Stop Recognition</button>
-  </div>
+    <div class="button-container" id="buttons">
+      <button class="jarvis-btn" onclick="window.api.startRecognition()">Start Recognition</button>
+      <button class="jarvis-btn" onclick="window.api.stopRecognition()">Stop Recognition</button>
 
-  <div>
-    <input type="text" id="nameInput" placeholder="Enter Name">
-    <button id="collectBtn">Collect Face</button>
+      <input type="text" id="nameInput" placeholder="Enter Name">
+      <button class="jarvis-btn" onclick="startCollection()">Collect Face</button>
+    </div>
   </div>
 
   <script>
-    document.getElementById('recognizeBtn').addEventListener('click', () => {
-      window.api.startRecognition();
-    });
+    function toggleButtons() {
+      const btns = document.getElementById("buttons");
+      btns.style.display = btns.style.display === "flex" ? "none" : "flex";
+    }
 
-    document.getElementById('stopBtn').addEventListener('click', () => {
-      window.api.stopRecognition();
-    });
-
-    document.getElementById('collectBtn').addEventListener('click', () => {
+    function startCollection() {
       const name = document.getElementById('nameInput').value.trim();
       if (name) {
         window.api.startCollection(name);
       } else {
         alert("Please enter a name before collecting face data.");
       }
-    });
+    }
   </script>
 </body>
 </html>
