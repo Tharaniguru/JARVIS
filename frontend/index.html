@@ -2,37 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JARVIS - AI Assistant</title>
+  <title>J.A.R.V.I.S</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="center-container">
-    <div class="pulse"></div>
-    <div class="jarvis-core" onclick="toggleButtons()"></div>
-
-    <div class="button-container" id="buttons">
-      <button class="jarvis-btn" onclick="window.api.startRecognition()">Start Recognition</button>
-      <button class="jarvis-btn" onclick="window.api.stopRecognition()">Stop Recognition</button>
-
+  <div class="core-container">
+    <div class="core" id="core"></div>
+    <div class="button-panel" id="buttonPanel">
+      <button class="option-button" id="recognizeBtn">Start Recognition</button>
+      <button class="option-button" id="stopBtn">Stop Recognition</button>
       <input type="text" id="nameInput" placeholder="Enter Name">
-      <button class="jarvis-btn" onclick="startCollection()">Collect Face</button>
+      <button class="option-button" id="collectBtn">Collect Face</button>
     </div>
   </div>
 
-  <script>
-    function toggleButtons() {
-      const btns = document.getElementById("buttons");
-      btns.style.display = btns.style.display === "flex" ? "none" : "flex";
-    }
-
-    function startCollection() {
-      const name = document.getElementById('nameInput').value.trim();
-      if (name) {
-        window.api.startCollection(name);
-      } else {
-        alert("Please enter a name before collecting face data.");
-      }
-    }
-  </script>
+  <script src="renderer.js"></script>
 </body>
+
 </html>

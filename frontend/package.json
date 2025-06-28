@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-"scripts": {
-  "start": "electron ."
-},
+  "scripts": {
+    "start": "electron ."
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "electron": "^36.5.0"
+  },
+  "devDependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
   }
 }
