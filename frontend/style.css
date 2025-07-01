@@ -93,3 +93,57 @@ body {
     opacity: 1;
   }
 }
+.mic-button-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+#micToggleBtn {
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: #0ff;
+  transition: transform 0.2s ease;
+}
+
+#micToggleBtn:hover {
+  transform: scale(1.1);
+}
+
+.status-container {
+  text-align: center;
+  margin-top: 20px;
+  font-family: sans-serif;
+  color: #0ff;
+  font-size: 18px;
+}
+
+#micIcon {
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.mic-active {
+  animation: pulseGlow 1s infinite;
+  color: #00ffcc;
+}
+
+.mic-idle {
+  animation: none;
+  color: #ff5555;
+}
+
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 5px #00ffcc;
+  }
+  50% {
+    text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff;
+  }
+  100% {
+    text-shadow: 0 0 5px #00ffcc;
+  }
+}

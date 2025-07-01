@@ -6,7 +6,6 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { spawn } = require('child_process');
 
-
 function createWindow() {
   const win = new BrowserWindow({
     width: 800,
@@ -20,7 +19,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  createWindow();
+  createWindow();       
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -31,7 +30,48 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// Face Recognition handler
+
+let voiceProcess = null;
+
+ipcMain.on('start-listening', () => {
+  if (voiceProcess) {
+    voiceProcess.stdin.write("start\n");
+    return;
+  }
+
+  voiceProcess = spawn('python', [
+    path.join(__dirname, '../backend/voice_assistance/main.py')
+  ]);
+
+  voiceProcess.stdin.setEncoding('utf-8');
+
+  voiceProcess.stdout.on('data', (data) => {
+    console.log(`[VOICE] ${data}`);
+  });
+
+  voiceProcess.stderr.on('data', (data) => {
+    console.error(`[VOICE ERROR] ${data}`);
+  });
+
+  voiceProcess.on('close', (code) => {
+    console.log(`Voice assistant exited with code ${code}`);
+    voiceProcess = null;
+  });
+
+  // Start listening once the process is ready
+  setTimeout(() => {
+    voiceProcess.stdin.write("start\n");
+  }, 1000);
+});
+
+ipcMain.on('stop-listening', () => {
+  if (voiceProcess) {
+    voiceProcess.stdin.write("stop\n");
+  }
+});
+
+
+
 let recognitionProcess = null;
 
 ipcMain.on('start-recognition', () => {
@@ -67,7 +107,7 @@ ipcMain.on('stop-recognition', () => {
   }
 });
 
-// Face Collection handler
+
 ipcMain.on('start-collection', (event, name) => {
   const pythonProcess = spawn('python', [
     path.join(__dirname, '../backend/face_recognition/collect_face.py'),

@@ -7,13 +7,28 @@
 </head>
 <body>
   <div class="core-container">
-    <div class="core" id="core"></div>
+    <!-- Core Button (Only for UI Panel) -->
+    <div class="core" id="core" title="Click to open panel"></div>
+
+    <!-- 🎙️ Mic Control Button -->
+    <div class="mic-button-container">
+      <button id="micToggleBtn" title="Toggle Mic">🎙️</button>
+    </div>
+
+    <!-- Animated Option Panel -->
     <div class="button-panel" id="buttonPanel">
       <button class="option-button" id="recognizeBtn">Start Recognition</button>
       <button class="option-button" id="stopBtn">Stop Recognition</button>
-      <input type="text" id="nameInput" placeholder="Enter Name">
+      
+      <input type="text" id="nameInput" placeholder="Enter Name" />
       <button class="option-button" id="collectBtn">Collect Face</button>
     </div>
+  </div>
+
+  <!-- Status Display -->
+  <div class="status-container">
+    <span id="micIcon" class="mic-idle">❌</span>
+    <span id="statusText">JARVIS is idle</span>
   </div>
 
   <script src="renderer.js"></script>

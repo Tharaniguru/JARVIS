@@ -30,7 +30,6 @@ def store_message(text, speaker="user", type="general"):
     memory_collection.insert_one(doc)
     print(f"[MEMORY] Stored message: '{text}'")
 
-# Example usage
 if __name__ == "__main__":
     user_input = input("Enter message to store: ")
     store_message(user_input)
